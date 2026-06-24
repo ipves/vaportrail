@@ -408,5 +408,32 @@ input::-webkit-search-cancel-button,input::-webkit-search-decoration,input::-web
 @keyframes r-1pzkwqh{0%{transform:translateY(100%);}100%{transform:translateY(0%);}}
 @keyframes r-imtty0{0%{opacity:0;}100%{opacity:1;}}
 @keyframes r-q67da2{0%{transform:translateX(-100%);}100%{transform:translateX(400%);}}
-@keyframes r-t2lo5v{0%{opacity:1;}100%{opacity:0;}}</style><script type="module">globalThis.__EXPO_ROUTER_HYDRATE__=true;</script><link rel="icon" href="/vaportrail/favicon.ico" /></head><body><div id="root"><div class="css-g5y9jx r-13awgt0"></div></div><script src="/vaportrail/_expo/static/js/web/entry-c2bc18ee88a8beb7ed9a070604202f47.js" defer></script>
+@keyframes r-t2lo5v{0%{opacity:1;}100%{opacity:0;}}</style><script type="module">globalThis.__EXPO_ROUTER_HYDRATE__=true;</script><link rel="icon" href="/vaportrail/favicon.ico" /></head><body><div id="root"><div class="css-g5y9jx r-13awgt0"></div></div><script id="VAPORTRAIL_PAGES_HISTORY_GUARD">
+(function () {
+  var base = '/vaportrail';
+  function fixUrl(url) {
+    if (url == null) return url;
+    if (typeof url === 'string') {
+      if (url.charAt(0) === '/' && url !== base && url.indexOf(base + '/') !== 0) {
+        return base + (url === '/' ? '/' : url);
+      }
+      return url;
+    }
+    try {
+      var parsed = new URL(url, window.location.href);
+      if (parsed.origin === window.location.origin && parsed.pathname.indexOf(base + '/') !== 0 && parsed.pathname !== base) {
+        parsed.pathname = base + (parsed.pathname === '/' ? '/' : parsed.pathname);
+        return parsed.toString();
+      }
+    } catch (error) {}
+    return url;
+  }
+  ['pushState', 'replaceState'].forEach(function (method) {
+    var original = window.history[method];
+    window.history[method] = function (state, title, url) {
+      return original.call(window.history, state, title, fixUrl(url));
+    };
+  });
+})();
+</script><script src="/vaportrail/_expo/static/js/web/entry-c2bc18ee88a8beb7ed9a070604202f47.js" defer></script>
 </body></html>
