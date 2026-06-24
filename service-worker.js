@@ -1,10 +1,8 @@
-const CACHE_NAME = 'vaportrail-shell-v1';
+const CACHE_NAME = 'vaportrail-shell-20260624092639';
 const APP_SHELL = ['/vaportrail/', '/vaportrail/manifest.webmanifest', '/vaportrail/icon.png', '/vaportrail/favicon.png'];
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
   self.skipWaiting();
 });
 
@@ -15,7 +13,7 @@ self.addEventListener('activate', (event) => {
       .then((keys) =>
         Promise.all(
           keys
-            .filter((key) => key !== CACHE_NAME)
+            .filter((key) => key.indexOf('vaportrail-shell-') === 0 && key !== CACHE_NAME)
             .map((key) => caches.delete(key))
         )
       )
@@ -36,20 +34,33 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  const isAppDocument = request.mode === 'navigate' || request.destination === 'document';
+  const isBuildAsset = url.pathname.indexOf('/vaportrail/_expo/') === 0;
+
+  if (isAppDocument || isBuildAsset) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const responseCopy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, responseCopy));
+          return response;
+        })
+        .catch(() => caches.match(request).then((cached) => cached || caches.match('/vaportrail/')))
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(request).then((cached) => {
       if (cached) {
         return cached;
       }
 
-      return fetch(request)
-        .then((response) => {
-          const responseCopy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, responseCopy));
-          return response;
-        })
-        .catch(() => caches.match('/vaportrail/'));
+      return fetch(request).then((response) => {
+        const responseCopy = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, responseCopy));
+        return response;
+      });
     })
   );
 });
-
