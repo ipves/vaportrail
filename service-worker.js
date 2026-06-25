@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vaportrail-shell-20260624230805';
+const CACHE_NAME = 'vaportrail-shell-20260624231838';
 const APP_SHELL = ['/vaportrail/', '/vaportrail/manifest.webmanifest', '/vaportrail/icon.png', '/vaportrail/favicon.png'];
 
 self.addEventListener('install', (event) => {
