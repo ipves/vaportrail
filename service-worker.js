@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vaportrail-shell-20260628065452';
+const CACHE_NAME = 'vaportrail-shell-20260628070351';
 const APP_SHELL = ['/vaportrail/', '/vaportrail/manifest.webmanifest', '/vaportrail/icon.png', '/vaportrail/favicon.png'];
 
 self.addEventListener('install', (event) => {
@@ -40,11 +40,7 @@ self.addEventListener('fetch', (event) => {
   if (isAppDocument || isBuildAsset) {
     event.respondWith(
       fetch(request)
-        .then((response) => {
-          const responseCopy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, responseCopy));
-          return response;
-        })
+        .then((response) => response)
         .catch(() => caches.match(request).then((cached) => cached || caches.match('/vaportrail/')))
     );
     return;
