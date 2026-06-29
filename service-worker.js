@@ -1,5 +1,5 @@
 const CACHE_NAME = 'vaportrail-shell-20260629100035';
-const APP_SHELL = ['/vaportrail/', '/vaportrail/manifest.webmanifest', '/vaportrail/icon.png', '/vaportrail/favicon.png'];
+const APP_SHELL = ['/vaportrail/', '/vaportrail/manifest-v2.webmanifest', '/vaportrail/vaportrail-icon-launch.png', '/vaportrail/favicon.png'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
