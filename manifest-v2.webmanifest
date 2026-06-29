@@ -1,0 +1,29 @@
+﻿{
+    "name":  "VaporTrail",
+    "short_name":  "VaporTrail",
+    "description":  "Find and identify nearby commercial aircraft.",
+    "start_url":  "/",
+    "scope":  "/",
+    "display":  "standalone",
+    "orientation":  "portrait",
+    "background_color":  "#07111f",
+    "theme_color":  "#07111f",
+    "categories":  [
+                       "travel",
+                       "utilities"
+                   ],
+    "icons":  [
+                  {
+                      "src":  "vaportrail-icon-transparent.png",
+                      "sizes":  "512x512",
+                      "type":  "image/png",
+                      "purpose":  "any"
+                  },
+                  {
+                      "src":  "favicon.png",
+                      "sizes":  "48x48",
+                      "type":  "image/png"
+                  }
+              ]
+}
+
